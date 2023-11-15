@@ -1,0 +1,14 @@
+
+db.createCollection( 'Supplier', {validator: {$jsonSchema: {bsonType: 'object',title:'Supplier',required: [         'name',          'address',          'phone',          'fax',          'nif',          'brand_id'],properties: {name: {bsonType: 'string'},address: {bsonType: 'array',items: {
+    title:'object',required: [         'street',          'number',          'floor',          'door',          'city',          'zip',          'country'],properties: {street: {bsonType: 'string'},number: {bsonType: 'int'},floor: {bsonType: 'int'},door: {bsonType: 'int'},city: {bsonType: 'string'},zip: {bsonType: 'string'},country: {bsonType: 'string'}}}},phone: {bsonType: 'string'},fax: {bsonType: 'string'},nif: {bsonType: 'string'},brand_id: {bsonType: 'array',items: {
+    title:'object',required: [         'name',          'id_brand'],properties: {name: {bsonType: 'string'},id_brand: {bsonType: 'string'}}}}}         }      }});  
+    db.createCollection( 'Gafas', {validator: {$jsonSchema: {bsonType: 'object',title:'Gafas',required: [         'mount',          'Supplier',          'brand_id',          'Invoice'],properties: {graduation_glasses: {bsonType: 'array',items: {
+    title:'object',properties: {left_lens: {bsonType: 'double'},right_lens: {bsonType: 'double'}}}},mount: {enum: ['floating','pasta_frame','metal']},colour: {bsonType: 'string'},colour_lens: {bsonType: 'object',
+    title:'object',properties: {colour_left_lens: {bsonType: 'string'},colour_right_lens: {bsonType: 'string'}}},brand_id: {bsonType: 'objectId'},Supplier: {bsonType: 'objectId'},brand_id: {bsonType: 'array',items: {bsonType: 'objectId'}},Invoice: {bsonType: 'objectId'}}         }      },
+    validationLevel:'strict',
+    validationAction:'error'
+    });  
+    db.createCollection( 'Costumer', {validator: {$jsonSchema: {bsonType: 'object',title:'Costumer',required: [         'name',          'zip',          'phone',          'email',          'register_date',          'recomended_by'],properties: {name: {bsonType: 'string'},zip: {bsonType: 'string'},phone: {bsonType: 'string'},email: {bsonType: 'string'},register_date: {bsonType: 'date'},recomended_by: {bsonType: 'objectId'}}         }      }});  
+    db.createCollection( 'Invoice', {validator: {$jsonSchema: {bsonType: 'object',title:'Invoice',required: [         'date',          'gafas_id',          'Employee'],properties: {date: {bsonType: 'date'},gafas_id: {bsonType: 'array',items: {
+    title:'object',}},Employee: {bsonType: 'objectId'}}         }      }});  
+    db.createCollection( 'Employee', {validator: {$jsonSchema: {bsonType: 'object',title:'Employee',required: [         'name'],properties: {name: {bsonType: 'string'}}         }      }});  
